@@ -3,19 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7528192268B2B0ECF6B3B410 /* Pods_MLKitDemoProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9059522AF6999E0FBC579330 /* Pods_MLKitDemoProject.framework */; };
 		753FA66B2587AEAD006974E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FA66A2587AEAD006974E8 /* AppDelegate.swift */; };
 		753FA66D2587AEAD006974E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FA66C2587AEAD006974E8 /* SceneDelegate.swift */; };
 		753FA66F2587AEAD006974E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FA66E2587AEAD006974E8 /* ViewController.swift */; };
 		753FA6722587AEAD006974E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6702587AEAD006974E8 /* Main.storyboard */; };
 		753FA6742587AEB1006974E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6732587AEB1006974E8 /* Assets.xcassets */; };
 		753FA6772587AEB1006974E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6752587AEB1006974E8 /* LaunchScreen.storyboard */; };
+		753FA6962587E3D7006974E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6952587E3D7006974E8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08C0870AE5F67A33990D3C08 /* Pods-MLKitDemoProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitDemoProject.debug.xcconfig"; path = "Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject.debug.xcconfig"; sourceTree = "<group>"; };
 		753FA6672587AEAD006974E8 /* MLKitDemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLKitDemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		753FA66A2587AEAD006974E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		753FA66C2587AEAD006974E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		753FA6732587AEB1006974E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		753FA6762587AEB1006974E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		753FA6782587AEB1006974E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		753FA6952587E3D7006974E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9059522AF6999E0FBC579330 /* Pods_MLKitDemoProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLKitDemoProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2AABBF122FF111DD2C8477 /* Pods-MLKitDemoProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitDemoProject.release.xcconfig"; path = "Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7528192268B2B0ECF6B3B410 /* Pods_MLKitDemoProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B193DF9391B3E38E085A6B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08C0870AE5F67A33990D3C08 /* Pods-MLKitDemoProject.debug.xcconfig */,
+				BB2AABBF122FF111DD2C8477 /* Pods-MLKitDemoProject.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		753FA65E2587AEAD006974E8 = {
 			isa = PBXGroup;
 			children = (
 				753FA6692587AEAD006974E8 /* MLKitDemoProject */,
 				753FA6682587AEAD006974E8 /* Products */,
+				1B193DF9391B3E38E085A6B6 /* Pods */,
+				829D715B0863057BF9A66B14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,9 +80,18 @@
 				753FA6702587AEAD006974E8 /* Main.storyboard */,
 				753FA6732587AEB1006974E8 /* Assets.xcassets */,
 				753FA6752587AEB1006974E8 /* LaunchScreen.storyboard */,
+				753FA6952587E3D7006974E8 /* GoogleService-Info.plist */,
 				753FA6782587AEB1006974E8 /* Info.plist */,
 			);
 			path = MLKitDemoProject;
+			sourceTree = "<group>";
+		};
+		829D715B0863057BF9A66B14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9059522AF6999E0FBC579330 /* Pods_MLKitDemoProject.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 753FA67B2587AEB1006974E8 /* Build configuration list for PBXNativeTarget "MLKitDemoProject" */;
 			buildPhases = (
+				DD86DE92E1817B15E042CA7B /* [CP] Check Pods Manifest.lock */,
 				753FA6632587AEAD006974E8 /* Sources */,
 				753FA6642587AEAD006974E8 /* Frameworks */,
 				753FA6652587AEAD006974E8 /* Resources */,
+				6EA90AC53D9B622787987A77 /* [CP] Embed Pods Frameworks */,
+				4750A12827F3B61C95FB65A6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,12 +155,72 @@
 			buildActionMask = 2147483647;
 			files = (
 				753FA6772587AEB1006974E8 /* LaunchScreen.storyboard in Resources */,
+				753FA6962587E3D7006974E8 /* GoogleService-Info.plist in Resources */,
 				753FA6742587AEB1006974E8 /* Assets.xcassets in Resources */,
 				753FA6722587AEAD006974E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4750A12827F3B61C95FB65A6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EA90AC53D9B622787987A77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD86DE92E1817B15E042CA7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MLKitDemoProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		753FA6632587AEAD006974E8 /* Sources */ = {
@@ -283,6 +373,7 @@
 		};
 		753FA67C2587AEB1006974E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C0870AE5F67A33990D3C08 /* Pods-MLKitDemoProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +393,7 @@
 		};
 		753FA67D2587AEB1006974E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB2AABBF122FF111DD2C8477 /* Pods-MLKitDemoProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
