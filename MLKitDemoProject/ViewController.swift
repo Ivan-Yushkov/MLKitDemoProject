@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         guard let image = UIImage(named: "StandartPhoto") else { return }
         imageView.image = image
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .brown
         view.addSubview(imageView)
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(createTapGesture())
@@ -81,6 +81,9 @@ class ViewController: UIViewController {
     private func setupButton() {
         scanButton.setTitle("Scan image", for: .normal)
         scanButton.setTitleColor(.brown, for: .normal)
+        scanButton.layer.borderWidth = 0.4
+        scanButton.layer.borderColor = UIColor.brown.cgColor
+        scanButton.layer.cornerRadius = 7
         view.addSubview(scanButton)
         
         scanButton.snp.makeConstraints { (make) in
@@ -101,6 +104,7 @@ class ViewController: UIViewController {
     func setupLable() {
         label.textAlignment = .center
         label.backgroundColor = .clear
+        label.numberOfLines = 0
         view.addSubview(label)
         
         label.snp.makeConstraints { (make) in
@@ -120,14 +124,19 @@ class ViewController: UIViewController {
     }
     
     private func processResult(text: VisionText?, error: Error?) {
-        guard let features = text, let image = imageView.image else { return }
+        guard let features = text else { return }
+        var recognizedText = ""
         for block in features.blocks {
             for line in block.lines {
                 for element in line.elements {
-                    self.label.text = element.text
+                    recognizedText += " \(element.text)"
                 }
             }
         }
+        DispatchQueue.main.async {
+            self.label.text = recognizedText
+        }
+        
     }
     
 }
