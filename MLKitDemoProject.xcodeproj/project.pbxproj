@@ -15,6 +15,9 @@
 		753FA6742587AEB1006974E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6732587AEB1006974E8 /* Assets.xcassets */; };
 		753FA6772587AEB1006974E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6752587AEB1006974E8 /* LaunchScreen.storyboard */; };
 		753FA6962587E3D7006974E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6952587E3D7006974E8 /* GoogleService-Info.plist */; };
+		753FA6DE2588A778006974E8 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6DB2588A778006974E8 /* manifest.json */; };
+		753FA6DF2588A778006974E8 /* dict.txt in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6DC2588A778006974E8 /* dict.txt */; };
+		753FA6E02588A778006974E8 /* model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 753FA6DD2588A778006974E8 /* model.tflite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		753FA6762587AEB1006974E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		753FA6782587AEB1006974E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753FA6952587E3D7006974E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		753FA6DB2588A778006974E8 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		753FA6DC2588A778006974E8 /* dict.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dict.txt; sourceTree = "<group>"; };
+		753FA6DD2588A778006974E8 /* model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model.tflite; sourceTree = "<group>"; };
 		9059522AF6999E0FBC579330 /* Pods_MLKitDemoProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLKitDemoProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2AABBF122FF111DD2C8477 /* Pods-MLKitDemoProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLKitDemoProject.release.xcconfig"; path = "Target Support Files/Pods-MLKitDemoProject/Pods-MLKitDemoProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,6 +62,7 @@
 		753FA65E2587AEAD006974E8 = {
 			isa = PBXGroup;
 			children = (
+				753FA6DA2588A778006974E8 /* rpsModel */,
 				753FA6692587AEAD006974E8 /* MLKitDemoProject */,
 				753FA6682587AEAD006974E8 /* Products */,
 				1B193DF9391B3E38E085A6B6 /* Pods */,
@@ -84,6 +91,16 @@
 				753FA6782587AEB1006974E8 /* Info.plist */,
 			);
 			path = MLKitDemoProject;
+			sourceTree = "<group>";
+		};
+		753FA6DA2588A778006974E8 /* rpsModel */ = {
+			isa = PBXGroup;
+			children = (
+				753FA6DB2588A778006974E8 /* manifest.json */,
+				753FA6DC2588A778006974E8 /* dict.txt */,
+				753FA6DD2588A778006974E8 /* model.tflite */,
+			);
+			path = rpsModel;
 			sourceTree = "<group>";
 		};
 		829D715B0863057BF9A66B14 /* Frameworks */ = {
@@ -154,9 +171,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				753FA6E02588A778006974E8 /* model.tflite in Resources */,
 				753FA6772587AEB1006974E8 /* LaunchScreen.storyboard in Resources */,
 				753FA6962587E3D7006974E8 /* GoogleService-Info.plist in Resources */,
+				753FA6DE2588A778006974E8 /* manifest.json in Resources */,
 				753FA6742587AEB1006974E8 /* Assets.xcassets in Resources */,
+				753FA6DF2588A778006974E8 /* dict.txt in Resources */,
 				753FA6722587AEAD006974E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

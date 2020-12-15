@@ -13,7 +13,10 @@ class ViewController: UIViewController {
 
     private var imageView = UIImageView()
    
-    private var scanButton = UIButton()
+    private var scanTextButton = UIButton()
+    private var scanImageButton = UIButton()
+    private var visionImage: VisionImage!
+    private var imageLabeler: VisionImageLabeler?
     
     var textRecognizer: VisionTextRecognizer!
     var label = UILabel()
@@ -24,15 +27,18 @@ class ViewController: UIViewController {
         setupImageView()
         let vision = Vision.vision()
         textRecognizer = vision.onDeviceTextRecognizer()
-        setupButton()
+        initializeMLModel()
+        setupScanTextButton()
+        setupScanImageButton()
         setupLable()
         
     }
 
     //MARK: - create image view and tap gesture with action
     private func setupImageView() {
-        guard let image = UIImage(named: "StandartPhoto") else { return }
+        guard let image = UIImage(named: "scissors") else { return }
         imageView.image = image
+        visionImage = VisionImage(image: image)
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .brown
         view.addSubview(imageView)
@@ -76,28 +82,49 @@ class ViewController: UIViewController {
         present(alerSheet, animated: true, completion: nil)
     }
     
-    //MARK: - Create button and action for button
+    //MARK: - Create buttons and action for buttons
     
-    private func setupButton() {
-        scanButton.setTitle("Scan image", for: .normal)
-        scanButton.setTitleColor(.brown, for: .normal)
-        scanButton.layer.borderWidth = 0.4
-        scanButton.layer.borderColor = UIColor.brown.cgColor
-        scanButton.layer.cornerRadius = 7
-        view.addSubview(scanButton)
+    private func setupScanTextButton() {
+        scanTextButton.setTitle("Scan text", for: .normal)
+        scanTextButton.setTitleColor(.brown, for: .normal)
+        scanTextButton.layer.borderWidth = 0.4
+        scanTextButton.layer.borderColor = UIColor.brown.cgColor
+        scanTextButton.layer.cornerRadius = 7
+        view.addSubview(scanTextButton)
         
-        scanButton.snp.makeConstraints { (make) in
+        scanTextButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(imageView.snp.bottom).offset(70)
             make.width.equalTo(150)
             make.height.equalTo(40)
         }
         
-        scanButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        scanTextButton.addTarget(self, action: #selector(buttonActionText), for: .touchUpInside)
     }
     
-    @objc func buttonAction() {
-        runTextRecognizer(image: imageView.image!)
+    @objc func buttonActionText() {
+        runTextRecognizer(visionImage: visionImage)
+    }
+    
+    private func setupScanImageButton() {
+        scanImageButton.setTitle("Scan image", for: .normal)
+        scanImageButton.setTitleColor(.brown, for: .normal)
+        scanImageButton.layer.borderWidth = 0.4
+        scanImageButton.layer.borderColor = UIColor.brown.cgColor
+        scanImageButton.layer.cornerRadius = 7
+        view.addSubview(scanImageButton)
+        
+        scanImageButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(scanTextButton.snp.bottom).offset(70)
+            make.width.equalTo(150)
+            make.height.equalTo(40)
+        }
+        scanImageButton.addTarget(self, action: #selector(buttonActionImage), for: .touchUpInside)
+    }
+    
+    @objc func buttonActionImage() {
+        performVisionImage(visionImage: visionImage)
     }
     
     //MARK: - create Lable
@@ -113,11 +140,11 @@ class ViewController: UIViewController {
             make.height.equalTo(100)
             make.top.equalToSuperview().offset(70)
         }
+        
     }
     
     //MARK: - text recognize methods
-    private func runTextRecognizer(image: UIImage) {
-        let visionImage = VisionImage(image: image)
+    private func runTextRecognizer(visionImage: VisionImage) {
         textRecognizer.process(visionImage) { (visionText, error) in
             self.processResult(text: visionText, error: error)
         }
@@ -135,12 +162,41 @@ class ViewController: UIViewController {
         }
         DispatchQueue.main.async {
             self.label.text = recognizedText
+            
         }
         
     }
-    
-}
 
+    //MARK: - Work with ML Model
+    private func initializeMLModel() {
+       
+        let manifestPath = Bundle.main.path(forResource: "manifest",
+                                                   ofType: "json",
+                                                   inDirectory: "rpsModel")
+        let myLocalModel = AutoMLLocalModel(manifestPath: manifestPath!)
+        let labelerOption = VisionOnDeviceAutoMLImageLabelerOptions(localModel: myLocalModel)
+        labelerOption.confidenceThreshold = 0.5
+        imageLabeler = Vision.vision().onDeviceAutoMLImageLabeler(options: labelerOption)
+    }
+    
+    private func performVisionImage(visionImage: VisionImage) {
+        imageLabeler?.process(visionImage, completion: { (labels, error) in
+            if let error = error {
+                print(error)
+            }
+            guard let labels = labels else { return }
+            if labels.count == 0 {
+                self.label.text = "Я не знаю, что это"
+            }
+            for visionLabel in labels {
+                let confidenceString = String(visionLabel.confidence?.doubleValue ?? 0 * 100)
+                let resultString = "\(visionLabel.text) ---- \(confidenceString)% точности"
+                print(resultString)
+                self.label.text = resultString
+            }
+        })
+    }
+}
 //MARK: - Work with image
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -156,8 +212,9 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        imageView.image = info[.editedImage] as? UIImage
+        guard let image = info[.editedImage] as? UIImage else { return }
+        imageView.image = image
+        visionImage = VisionImage(image: image)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         dismiss(animated: true, completion: nil)

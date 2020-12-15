@@ -6,9 +6,9 @@ target 'MLKitDemoProject' do
   use_frameworks!
 
   pod 'SnapKit'
-  pod 'Firebase/Core'
   pod 'Firebase/MLVision', '6.25.0'
   pod 'Firebase/MLVisionTextModel', '6.25.0'
+  pod 'Firebase/MLVisionAutoML'
 
 
   # Pods for MLKitDemoProject
