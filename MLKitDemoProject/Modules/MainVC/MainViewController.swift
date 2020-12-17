@@ -9,25 +9,29 @@ import UIKit
 import SnapKit
 import Firebase
 
-class ViewController: UIViewController {
+
+protocol MainViewControllerProtocol: class {
+    func updateInterface(text: String?)
+}
+
+class MainViewController: UIViewController, MainViewControllerProtocol {
 
     private var imageView = UIImageView()
-   
+    public var presenter: PresenterMainVCProtocol?
     private var scanTextButton = UIButton()
     private var scanImageButton = UIButton()
     private var visionImage: VisionImage!
-    private var imageLabeler: VisionImageLabeler?
     
-    var textRecognizer: VisionTextRecognizer!
+    
     var label = UILabel()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ConfiguratorMainVC().configure(view: self, mlService: DI.resolve())
         setupImageView()
-        let vision = Vision.vision()
-        textRecognizer = vision.onDeviceTextRecognizer()
-        initializeMLModel()
+        //initializeMLModel()
         setupScanTextButton()
         setupScanImageButton()
         setupLable()
@@ -36,7 +40,7 @@ class ViewController: UIViewController {
 
     //MARK: - create image view and tap gesture with action
     private func setupImageView() {
-        guard let image = UIImage(named: "scissors") else { return }
+        guard let image = UIImage(named: "textNewYork") else { return }
         imageView.image = image
         visionImage = VisionImage(image: image)
         imageView.contentMode = .scaleAspectFill
@@ -103,7 +107,7 @@ class ViewController: UIViewController {
     }
     
     @objc func buttonActionText() {
-        runTextRecognizer(visionImage: visionImage)
+        presenter?.getTextFromImage(visionImage: visionImage)
     }
     
     private func setupScanImageButton() {
@@ -124,7 +128,7 @@ class ViewController: UIViewController {
     }
     
     @objc func buttonActionImage() {
-        performVisionImage(visionImage: visionImage)
+      
     }
     
     //MARK: - create Lable
@@ -143,62 +147,17 @@ class ViewController: UIViewController {
         
     }
     
-    //MARK: - text recognize methods
-    private func runTextRecognizer(visionImage: VisionImage) {
-        textRecognizer.process(visionImage) { (visionText, error) in
-            self.processResult(text: visionText, error: error)
-        }
+    public func updateInterface(text: String?) {
+        label.text = text
     }
     
-    private func processResult(text: VisionText?, error: Error?) {
-        guard let features = text else { return }
-        var recognizedText = ""
-        for block in features.blocks {
-            for line in block.lines {
-                for element in line.elements {
-                    recognizedText += " \(element.text)"
-                }
-            }
-        }
-        DispatchQueue.main.async {
-            self.label.text = recognizedText
-            
-        }
-        
-    }
 
-    //MARK: - Work with ML Model
-    private func initializeMLModel() {
-       
-        let manifestPath = Bundle.main.path(forResource: "manifest",
-                                                   ofType: "json",
-                                                   inDirectory: "rpsModel")
-        let myLocalModel = AutoMLLocalModel(manifestPath: manifestPath!)
-        let labelerOption = VisionOnDeviceAutoMLImageLabelerOptions(localModel: myLocalModel)
-        labelerOption.confidenceThreshold = 0.5
-        imageLabeler = Vision.vision().onDeviceAutoMLImageLabeler(options: labelerOption)
-    }
     
-    private func performVisionImage(visionImage: VisionImage) {
-        imageLabeler?.process(visionImage, completion: { (labels, error) in
-            if let error = error {
-                print(error)
-            }
-            guard let labels = labels else { return }
-            if labels.count == 0 {
-                self.label.text = "Я не знаю, что это"
-            }
-            for visionLabel in labels {
-                let confidenceString = String(visionLabel.confidence?.doubleValue ?? 0 * 100)
-                let resultString = "\(visionLabel.text) ---- \(confidenceString)% точности"
-                print(resultString)
-                self.label.text = resultString
-            }
-        })
-    }
+    
+    
 }
 //MARK: - Work with image
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     fileprivate func chooseImagePicker(source: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(source) {

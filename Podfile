@@ -9,6 +9,8 @@ target 'MLKitDemoProject' do
   pod 'Firebase/MLVision', '6.25.0'
   pod 'Firebase/MLVisionTextModel', '6.25.0'
   pod 'Firebase/MLVisionAutoML'
+  pod 'RxSwift'
+  pod 'DITranquillity', '~> 3.7.1'
 
 
   # Pods for MLKitDemoProject
